@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS persons (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    phone VARCHAR NOT NULL,
+    document VARCHAR UNIQUE NOT NULL
+);
