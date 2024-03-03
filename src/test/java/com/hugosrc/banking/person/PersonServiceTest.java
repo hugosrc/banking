@@ -25,8 +25,8 @@ class PersonServiceTest {
     void shouldReturnAllPersons() {
         // Arrange
         List<Person> persons = Arrays.asList(
-                new Person(1, "John Doe", "123456789", "12345678902"),
-                new Person(2, "Jane Doe", "987654321", "98765432101")
+                new Person(1, "John Doe", "123456789", "12345678902", null),
+                new Person(2, "Jane Doe", "987654321", "98765432101", null)
         );
 
         when(personRepository.findAll()).thenReturn(persons);
