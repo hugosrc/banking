@@ -1,9 +1,12 @@
 package com.hugosrc.banking.person;
 
+import com.hugosrc.banking.account.Account;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -24,6 +27,9 @@ public class Person {
 
     @Column(name = "document", unique = true, nullable = false)
     private String document;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Account> accounts;
 
     public Person(String name, String phone, String document) {
         this.name = name;
