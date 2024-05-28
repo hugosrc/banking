@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=banking
+    volumes:
+      - polls_pg_data:/bitnami/postgresql
+    networks:
+      - backend
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - DB_URL=jdbc:postgresql://postgres:5432/banking
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    depends_on:
+      - postgres
+    networks:
+      - backend
+
+volumes:
+  polls_pg_data:
+
+networks:
+  backend:
