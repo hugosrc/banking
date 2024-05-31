@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import ActionCard from '@/components/ActionCard.vue';
 import BalanceToggle from '@/components/BalanceToggle.vue';
+import IconDeposit from '@/components/icons/IconDeposit.vue';
+import IconTransfer from '@/components/icons/IconTransfer.vue';
+import IconWithdraw from '@/components/icons/IconWithdraw.vue';
 import { ref } from 'vue';
 
 const balance = ref(0)
@@ -17,6 +21,15 @@ const balance = ref(0)
         <BalanceToggle :balance="balance"/>
       </div>
     </section>
+
+    <div class="quick-actions">
+      <h2>Ações Rápidas</h2>
+      <div class="content">
+        <ActionCard :icon="IconTransfer" label="Transferir"/>
+        <ActionCard :icon="IconWithdraw" label="Sacar"/>
+        <ActionCard :icon="IconDeposit" label="Depositar"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,7 +47,13 @@ const balance = ref(0)
   margin: 32px 0;
 }
 
-.wallet h2 {
+.quick-actions .content {
+  display: flex;
+  gap: 16px;
+}
+
+.wallet h2,
+.quick-actions h2 {
   color: #fff;
   margin-bottom: 16px
 }
