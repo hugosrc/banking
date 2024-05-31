@@ -13,7 +13,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'dashboard',
-      component: DashboardView
+      component: DashboardView,
+      beforeEnter: (to, from, next) => {
+        if (!(to.query.account && to.query.digit)) {
+          next('/auth')
+        }
+  
+        next()
+      }
     }
   ]
 })
