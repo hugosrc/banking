@@ -1,12 +1,37 @@
 <script setup lang="ts">
 import ActionCard from '@/components/ActionCard.vue';
 import BalanceToggle from '@/components/BalanceToggle.vue';
+import BaseModal from '@/components/BaseModal.vue';
 import IconDeposit from '@/components/icons/IconDeposit.vue';
 import IconTransfer from '@/components/icons/IconTransfer.vue';
 import IconWithdraw from '@/components/icons/IconWithdraw.vue';
 import { ref } from 'vue';
 
 const balance = ref(0)
+
+type ModalType = 'transfer' | 'withdraw' | 'deposit'
+
+const modals = ref({
+  transfer: false,
+  withdraw: false,
+  deposit: false
+})
+
+const modalTitles: Record<ModalType, string> = {
+  transfer: 'Transferir',
+  withdraw: 'Sacar',
+  deposit: 'Depositar',
+};
+
+const toggleModal = (type: ModalType, state: boolean) => {
+  modals.value[type] = state
+}
+
+const actions = [
+  { icon: IconTransfer, label: 'Transferir', modal: 'transfer' as ModalType},
+  { icon: IconWithdraw, label: 'Sacar', modal: 'withdraw' as ModalType},
+  { icon: IconDeposit, label: 'Depositar', modal: 'deposit' as ModalType},
+]
 </script>
 
 <template>
@@ -25,11 +50,33 @@ const balance = ref(0)
     <div class="quick-actions">
       <h2>Ações Rápidas</h2>
       <div class="content">
-        <ActionCard :icon="IconTransfer" label="Transferir"/>
-        <ActionCard :icon="IconWithdraw" label="Sacar"/>
-        <ActionCard :icon="IconDeposit" label="Depositar"/>
+        <ActionCard 
+          v-for="action in actions"
+          :key="action.modal"
+          :icon="action.icon" 
+          :label="action.label" 
+          @click="toggleModal(action.modal, true)"
+        />
       </div>
     </div>
+
+    <BaseModal 
+      v-for="(state, type) in modals"
+      :key="type"
+      :show="state" 
+      :title="modalTitles[type]" 
+      @close="toggleModal(type, false)"
+    >
+      <template v-if="type === 'transfer'">
+        <h2>Transfer Form</h2>
+      </template>
+      <template v-if="type === 'withdraw'">
+        <h2>Withdraw Form</h2>
+      </template>
+      <template v-if="type === 'deposit'">
+        <h2>Deposit Form</h2>
+      </template>
+    </BaseModal>
   </div>
 </template>
 
