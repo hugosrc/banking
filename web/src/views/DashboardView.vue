@@ -2,6 +2,7 @@
 import ActionCard from '@/components/ActionCard.vue';
 import BalanceToggle from '@/components/BalanceToggle.vue';
 import TransferForm from '@/components/TransferForm.vue';
+import WithdrawForm from '@/components/WithdrawForm.vue';
 import BaseModal from '@/components/BaseModal.vue';
 import IconDeposit from '@/components/icons/IconDeposit.vue';
 import IconTransfer from '@/components/icons/IconTransfer.vue';
@@ -72,7 +73,7 @@ const actions = [
         <TransferForm/>
       </template>
       <template v-if="type === 'withdraw'">
-        <h2>Withdraw Form</h2>
+        <WithdrawForm/>
       </template>
       <template v-if="type === 'deposit'">
         <h2>Deposit Form</h2>
