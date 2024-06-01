@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ActionCard from '@/components/ActionCard.vue';
 import BalanceToggle from '@/components/BalanceToggle.vue';
+import TransferForm from '@/components/TransferForm.vue';
 import BaseModal from '@/components/BaseModal.vue';
 import IconDeposit from '@/components/icons/IconDeposit.vue';
 import IconTransfer from '@/components/icons/IconTransfer.vue';
@@ -68,7 +69,7 @@ const actions = [
       @close="toggleModal(type, false)"
     >
       <template v-if="type === 'transfer'">
-        <h2>Transfer Form</h2>
+        <TransferForm/>
       </template>
       <template v-if="type === 'withdraw'">
         <h2>Withdraw Form</h2>
